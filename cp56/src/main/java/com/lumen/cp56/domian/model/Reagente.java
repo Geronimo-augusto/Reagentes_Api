@@ -1,18 +1,16 @@
 package com.lumen.cp56.domian.model;
 
-import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-@Entity
-@Table(name = "reagentes")
+
 public class Reagente {
 
-    @Id
-    @Column(name = "id", updatable = false, nullable = false)
+
     private UUID id;
 
     private String nome;
@@ -22,22 +20,16 @@ public class Reagente {
     private LocalDate dataRecebimento;
     private Integer quantidadeEstoque;
 
-    @Enumerated(EnumType.STRING)
+
     private StatusReagente status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fabricante_id")
+
     private Fabricante fabricante;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "localizacao_estoque_id")
+
     private LocalizacaoEstoque localizacaoEstoque;
 
-    @OneToMany(
-            mappedBy = "reagente",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+
     private List<MovimentacaoEstoque> movimentacoes = new ArrayList<>();
 
     // Construtor padrão

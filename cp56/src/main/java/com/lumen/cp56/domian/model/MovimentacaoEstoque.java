@@ -1,17 +1,15 @@
 package com.lumen.cp56.domian.model;
 
-import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
-@Entity
-@Table(name = "movimentacoes_estoque")
+
 public class MovimentacaoEstoque {
 
-    @Id
-    @Column(name = "id", updatable = false, nullable = false)
+
     private UUID id;
 
     private String observacao;
@@ -19,11 +17,10 @@ public class MovimentacaoEstoque {
     private LocalDateTime dataHoraMovimentacao;
     private LocalDate dataBalanco;
 
-    @Enumerated(EnumType.STRING)
+
     private TipoMovimentacao tipo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reagente_id")
+
     private Reagente reagente;
 
     // Construtor padrão

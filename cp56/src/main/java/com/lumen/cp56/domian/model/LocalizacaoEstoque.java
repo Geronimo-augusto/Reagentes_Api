@@ -1,17 +1,14 @@
 package com.lumen.cp56.domian.model;
 
-import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-@Entity
-@Table(name = "localizacoes_estoque")
 public class LocalizacaoEstoque {
 
-    @Id
-    @Column(name = "id", updatable = false, nullable = false)
+
     private UUID id;
 
     private String codigoLocal;
@@ -19,14 +16,10 @@ public class LocalizacaoEstoque {
     private String setor;
     private String faixaTemperaturaNominal;
 
-    @Enumerated(EnumType.STRING)
+
     private TipoLocalizacaoEstoque tipo;
 
-    @OneToMany(
-            mappedBy = "localizacaoEstoque",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+
     private List<Reagente> reagentes = new ArrayList<>();
 
     // Construtor padrão
