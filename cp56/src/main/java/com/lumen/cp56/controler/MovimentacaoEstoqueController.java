@@ -1,5 +1,8 @@
 package com.lumen.cp56.controler;
 
+import com.lumen.cp56.domian.dtos.Input.MovimentacaoEstoqueInputDTO;
+import com.lumen.cp56.domian.dtos.Output.MovimentacaoEstoqueOutputDTO;
+import com.lumen.cp56.domian.service.MovimentacaoEstoqueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.UUID;
+
 
 @RestController
 @RequestMapping("/reagentes/{reagenteId}/movimentacoes") // URL Base Aninhada
@@ -21,7 +27,7 @@ public class MovimentacaoEstoqueController {
 
     // Lista todas as movimentações DESTE reagente
     @GetMapping
-    public ResponseEntity<List<MovimentacaoEstoqueSetDTO>> getAllByReagente(
+    public ResponseEntity<List<MovimentacaoEstoqueOutputDTO>> getAllByReagente(
             @PathVariable UUID reagenteId) {
 
         return ResponseEntity.ok(movimentacaoService.findAllByReagenteId(reagenteId));
@@ -29,11 +35,11 @@ public class MovimentacaoEstoqueController {
 
     // Cria uma nova movimentação PARA ESTE reagente
     @PostMapping
-    public ResponseEntity<MovimentacaoEstoqueSetDTO> create(
+    public ResponseEntity<MovimentacaoEstoqueOutputDTO> create(
             @PathVariable UUID reagenteId,
-            @RequestBody MovimentacaoEstoqueGetDTO dto) {
+            @RequestBody MovimentacaoEstoqueInputDTO dto) {
 
-        MovimentacaoEstoqueSetDTO novaMovimentacao = movimentacaoService.create(reagenteId, dto);
+        MovimentacaoEstoqueOutputDTO novaMovimentacao = movimentacaoService.create(reagenteId, dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(novaMovimentacao);
     }
 
