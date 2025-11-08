@@ -3,7 +3,6 @@ package com.lumen.cp56.controler;
 import com.lumen.cp56.domian.dtos.Input.FabricanteInputDTO;
 import com.lumen.cp56.domian.dtos.Output.FabricanteOutputDTO;
 import com.lumen.cp56.domian.service.FabricanteService;
-import com.lumen.cp56.domian.service.ReagenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +18,7 @@ import java.util.UUID;
 @RequestMapping("/fabricantes") // URL Base
 public class FabricanteController {
 
+    @Autowired
     private FabricanteService fabricanteService;
 
     @GetMapping

@@ -1,8 +1,8 @@
 package com.lumen.cp56.controler;
 
-import com.lumen.cp56.domian.dtos.Input.ReagenteInputDTO;
-import com.lumen.cp56.domian.dtos.Output.ReagenteOutputDTO;
-import com.lumen.cp56.domian.service.ReagenteService;
+import com.lumen.cp56.domian.dtos.Input.LocalizacaoEstoqueInputDTO;
+import com.lumen.cp56.domian.dtos.Output.LocalizacaoEstoqueOutputDTO;
+import com.lumen.cp56.domian.service.LocalizacaoEstoqueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,24 +17,25 @@ import java.util.UUID;
 @RequestMapping("/localizacoes-estoque") // URL Base
 public class LocalizacaoEstoqueController {
 
-    private ReagenteService reagenteService;
+    @Autowired
+    private LocalizacaoEstoqueService localizacaoEstoqueService;
 
     @GetMapping
     @ResponseStatus(code = HttpStatus.OK)
-    public List<ReagenteOutputDTO> listar(){
-        return reagenteService.findAll();
+    public List<LocalizacaoEstoqueOutputDTO> listar(){
+        return localizacaoEstoqueService.findAll();
     }
 
     @GetMapping("/{reagenteId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ResponseEntity<ReagenteOutputDTO> buscar(@PathVariable UUID reagenteId) {
-        return ResponseEntity.ok(reagenteService.findById(reagenteId));
+    public ResponseEntity<LocalizacaoEstoqueOutputDTO> buscar(@PathVariable UUID reagenteId) {
+        return ResponseEntity.ok(localizacaoEstoqueService.findById(reagenteId));
     }
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public ResponseEntity<ReagenteOutputDTO> adicionar(@RequestBody ReagenteInputDTO input) {
-        ReagenteOutputDTO novoReagente =  reagenteService.create(input);
+    public ResponseEntity<LocalizacaoEstoqueOutputDTO> adicionar(@RequestBody LocalizacaoEstoqueInputDTO input) {
+        LocalizacaoEstoqueOutputDTO novoReagente =  localizacaoEstoqueService.create(input);
 
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -48,13 +49,13 @@ public class LocalizacaoEstoqueController {
 
     @PutMapping("/{reagenteId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ResponseEntity<ReagenteOutputDTO> atualizar(@PathVariable UUID reagenteId, @RequestBody ReagenteInputDTO input) {
-        return ResponseEntity.ok(reagenteService.update(reagenteId,input));
+    public ResponseEntity<LocalizacaoEstoqueOutputDTO> atualizar(@PathVariable UUID reagenteId, @RequestBody LocalizacaoEstoqueInputDTO input) {
+        return ResponseEntity.ok(localizacaoEstoqueService.update(reagenteId,input));
     }
 
     @DeleteMapping("/{reagenteId}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void excluir(@PathVariable UUID reagenteId) {
-        reagenteService.delete(reagenteId);
+        localizacaoEstoqueService.delete(reagenteId);
     }
 }
