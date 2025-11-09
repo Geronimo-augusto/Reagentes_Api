@@ -122,7 +122,7 @@ public class DataInitializer implements CommandLineRunner {
             movimentacaoEstoqueRepository.save(mov2);
             reagente2.getMovimentacoes().add(mov2); // Adiciona na lista do reagente
 
-            log.info("... Carga de dados em memória concluída.");
+           
 
         } else {
             log.info("Banco de dados já populado. Nenhuma ação necessária.");
