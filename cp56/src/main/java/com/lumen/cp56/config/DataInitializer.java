@@ -127,6 +127,8 @@ public class DataInitializer implements CommandLineRunner {
 
             log.info("... Carga de dados em memória concluída.");
 
-        } 
+        } else {
+            log.info("Banco de dados já populado. Nenhuma ação necessária.");
+        }
     }
 }
