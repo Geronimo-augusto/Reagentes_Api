@@ -50,7 +50,7 @@ public class DataInitializer implements CommandLineRunner {
             fab1.setNomeFantasia("Roche");
             fab1.setCnpj("30.280.358/0001-23");
             fab1.setPaisOrigem("Brasil");
-            fabricanteRepository.save(fab1); // O save() agora gera e atribui o ID
+            fabricanteRepository.save(fab1); 
 
             Fabricante fab2 = new Fabricante();
             fab2.setNomeOficial("Abbott Laboratórios do Brasil Ltda.");
