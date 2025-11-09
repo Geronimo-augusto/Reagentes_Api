@@ -14,74 +14,49 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/reagentes")
+@RequestMapping("/reagentes") // URL Base
 public class ReagenteController {
 
     @Autowired
     private ReagenteService reagenteService;
 
     @GetMapping
-    public ResponseEntity<?> listarTodos() {
-        try {
-            List<ReagenteOutputDTO> lista = reagenteService.findAll();
-            return ResponseEntity.ok(lista);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Erro ao listar reagentes: " + e.getMessage());
-        }
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<ReagenteOutputDTO> listar(){
+       return reagenteService.findAll();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> buscarPorId(@PathVariable("id") UUID idReagente) {
-        try {
-            ReagenteOutputDTO reagente = reagenteService.findById(idReagente);
-            return ResponseEntity.ok(reagente);
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Reagente não encontrado: " + e.getMessage());
-        }
+    @GetMapping("/{reagenteId}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public ResponseEntity<ReagenteOutputDTO> buscar(@PathVariable UUID reagenteId) {
+        return ResponseEntity.ok(reagenteService.findById(reagenteId));
     }
 
     @PostMapping
-    public ResponseEntity<?> criar(@RequestBody ReagenteInputDTO dadosEntrada) {
-        try {
-            ReagenteOutputDTO reagenteCriado = reagenteService.create(dadosEntrada);
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public ResponseEntity<ReagenteOutputDTO> adicionar(@RequestBody ReagenteInputDTO input) {
+        ReagenteOutputDTO novoReagente =  reagenteService.create(input);
 
-            URI uri = ServletUriComponentsBuilder
-                    .fromCurrentRequest()
-                    .path("/{id}")
-                    .buildAndExpand(reagenteCriado.id())
-                    .toUri();
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(novoReagente.id())
+                .toUri()
+                ;
 
-            return ResponseEntity.created(uri).body(reagenteCriado);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body("Dados inválidos: " + e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Erro ao criar reagente: " + e.getMessage());
-        }
+        return ResponseEntity.created(uri).body(novoReagente);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> atualizar(@PathVariable("id") UUID idReagente,
-                                       @RequestBody ReagenteInputDTO dadosEntrada) {
-        try {
-            ReagenteOutputDTO atualizado = reagenteService.update(idReagente, dadosEntrada);
-            return ResponseEntity.ok(atualizado);
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Reagente não encontrado: " + e.getMessage());
-        }
+    @PutMapping("/{reagenteId}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public ResponseEntity<ReagenteOutputDTO> atualizar(@PathVariable UUID reagenteId, @RequestBody ReagenteInputDTO input) {
+        return ResponseEntity.ok(reagenteService.update(reagenteId,input));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> excluir(@PathVariable("id") UUID idReagente) {
-        try {
-            reagenteService.delete(idReagente);
-            return ResponseEntity.noContent().build();
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Reagente não encontrado: " + e.getMessage());
-        }
+    @DeleteMapping("/{reagenteId}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void excluir(@PathVariable UUID reagenteId) {
+        reagenteService.delete(reagenteId);
     }
+
 }
