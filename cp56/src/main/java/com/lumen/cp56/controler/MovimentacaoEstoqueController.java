@@ -26,7 +26,7 @@ public class MovimentacaoEstoqueController {
     @Autowired
     private MovimentacaoEstoqueService movimentacaoService;
 
-    // Lista todas as movimentações DESTE reagente
+
     @GetMapping
     public ResponseEntity<List<MovimentacaoEstoqueOutputDTO>> getAllByReagente(
             @PathVariable UUID reagenteId) {
