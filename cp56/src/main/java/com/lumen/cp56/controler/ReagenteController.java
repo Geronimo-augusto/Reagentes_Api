@@ -4,7 +4,6 @@ import com.lumen.cp56.domian.dtos.Input.ReagenteInputDTO;
 import com.lumen.cp56.domian.dtos.Output.ReagenteOutputDTO;
 import com.lumen.cp56.domian.service.ReagenteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -14,45 +13,45 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/reagentes")
+@RequestMapping("/api/reagentes") // rota mais descritiva
 public class ReagenteController {
 
     @Autowired
     private ReagenteService reagenteService;
 
     @GetMapping
-    public ResponseEntity<List<ReagenteOutputDTO>> listar() {
+    public ResponseEntity<List<ReagenteOutputDTO>> listarTodos() {
         return ResponseEntity.ok(reagenteService.findAll());
     }
 
-    @GetMapping("/{reagenteId}")
-    public ResponseEntity<ReagenteOutputDTO> buscar(@PathVariable UUID reagenteId) {
-        return ResponseEntity.ok(reagenteService.findById(reagenteId));
+    @GetMapping("/{id}")
+    public ResponseEntity<ReagenteOutputDTO> buscarPorId(@PathVariable("id") UUID idReagente) {
+        return ResponseEntity.ok(reagenteService.findById(idReagente));
     }
 
     @PostMapping
-    public ResponseEntity<ReagenteOutputDTO> adicionar(@RequestBody ReagenteInputDTO input) {
-        ReagenteOutputDTO novoReagente = reagenteService.create(input);
+    public ResponseEntity<ReagenteOutputDTO> criar(@RequestBody ReagenteInputDTO dadosEntrada) {
+        ReagenteOutputDTO reagenteCriado = reagenteService.create(dadosEntrada);
 
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(novoReagente.id())
+                .buildAndExpand(reagenteCriado.id())
                 .toUri();
 
-        return ResponseEntity.created(uri).body(novoReagente);
+        return ResponseEntity.created(uri).body(reagenteCriado);
     }
 
-    @PutMapping("/{reagenteId}")
+    @PutMapping("/{id}")
     public ResponseEntity<ReagenteOutputDTO> atualizar(
-            @PathVariable UUID reagenteId,
-            @RequestBody ReagenteInputDTO input) {
-        return ResponseEntity.ok(reagenteService.update(reagenteId, input));
+            @PathVariable("id") UUID idReagente,
+            @RequestBody ReagenteInputDTO dadosEntrada) {
+        return ResponseEntity.ok(reagenteService.update(idReagente, dadosEntrada));
     }
 
-    @DeleteMapping("/{reagenteId}")
-    public ResponseEntity<Void> excluir(@PathVariable UUID reagenteId) {
-        reagenteService.delete(reagenteId);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluir(@PathVariable("id") UUID idReagente) {
+        reagenteService.delete(idReagente);
         return ResponseEntity.noContent().build();
     }
 }
