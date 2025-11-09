@@ -3,7 +3,6 @@ package com.lumen.cp56.controler;
 import com.lumen.cp56.domian.dtos.Input.ReagenteInputDTO;
 import com.lumen.cp56.domian.dtos.Output.ReagenteOutputDTO;
 import com.lumen.cp56.domian.service.ReagenteService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,23 +20,17 @@ public class ReagenteController {
     @Autowired
     private ReagenteService reagenteService;
 
-
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public List<ReagenteOutputDTO> listar() {
-        return reagenteService.findAll();
+    public ResponseEntity<List<ReagenteOutputDTO>> listar() {
+        return ResponseEntity.ok(reagenteService.findAll());
     }
 
-
     @GetMapping("/{reagenteId}")
-    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ReagenteOutputDTO> buscar(@PathVariable UUID reagenteId) {
         return ResponseEntity.ok(reagenteService.findById(reagenteId));
     }
 
-
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ReagenteOutputDTO> adicionar(@RequestBody ReagenteInputDTO input) {
         ReagenteOutputDTO novoReagente = reagenteService.create(input);
 
@@ -50,20 +43,16 @@ public class ReagenteController {
         return ResponseEntity.created(uri).body(novoReagente);
     }
 
-
     @PutMapping("/{reagenteId}")
-    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ReagenteOutputDTO> atualizar(
             @PathVariable UUID reagenteId,
-            @RequestBody ReagenteInputDTO input
-    ) {
+            @RequestBody ReagenteInputDTO input) {
         return ResponseEntity.ok(reagenteService.update(reagenteId, input));
     }
 
-
     @DeleteMapping("/{reagenteId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void excluir(@PathVariable UUID reagenteId) {
+    public ResponseEntity<Void> excluir(@PathVariable UUID reagenteId) {
         reagenteService.delete(reagenteId);
+        return ResponseEntity.noContent().build();
     }
 }
