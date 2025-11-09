@@ -104,7 +104,7 @@ public class DataInitializer implements CommandLineRunner {
             reagente2.setLocalizacaoEstoque(loc2); // Associa ao loc2
             reagenteRepository.save(reagente2);
 
-            // --- 4. Criar Movimentações Iniciais (para justificar o estoque) ---
+            
             MovimentacaoEstoque mov1 = new MovimentacaoEstoque();
             mov1.setId(UUID.randomUUID());
             mov1.setReagente(reagente1); // Associa ao reagente1
