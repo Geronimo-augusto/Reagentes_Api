@@ -81,7 +81,7 @@ public class DataInitializer implements CommandLineRunner {
             reagente1.setNome("Elecsys Anti-HBs II");
             reagente1.setCodigoSku("04788737190");
             reagente1.setLote("LOTE-A123");
-            reagente1.setDataValidade(LocalDate.now().plusMonths(6)); // Válido por 6 meses
+            reagente1.setDataValidade(LocalDate.now().plusMonths(6)); 
             reagente1.setDataRecebimento(LocalDate.now().minusDays(10));
             reagente1.setStatus(StatusReagente.LIBERADO);
             reagente1.setQuantidadeEstoque(100); // Estoque inicial
