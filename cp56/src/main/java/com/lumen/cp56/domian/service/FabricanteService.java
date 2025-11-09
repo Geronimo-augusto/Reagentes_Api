@@ -6,15 +6,12 @@ import com.lumen.cp56.domian.dtos.Output.FabricanteOutputDTO;
 import com.lumen.cp56.domian.model.Fabricante;
 import com.lumen.cp56.domian.repository.FabricanteRepository;
 import com.lumen.cp56.mapper.FabricanteMapper;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.UUID;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class FabricanteService {
 
@@ -23,16 +20,15 @@ public class FabricanteService {
 
     private Fabricante findFabricanteById(UUID id) {
         return fabricanteRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Fabricante não encontrado com ID: " + id));
+                .orElseThrow(() -> new RuntimeException("Fabricante não encontrado com ID: " + id));
     }
 
-    @Transactional(readOnly = true)
+
     public List<FabricanteOutputDTO> findAll() {
         List<Fabricante> fabricantes = fabricanteRepository.findAll();
         return fabricanteMapper.toOutputDTOList(fabricantes);
     }
 
-    @Transactional(readOnly = true)
     public FabricanteOutputDTO findById(UUID id) {
         Fabricante fabricante = findFabricanteById(id);
         return fabricanteMapper.toOutputDTO(fabricante);

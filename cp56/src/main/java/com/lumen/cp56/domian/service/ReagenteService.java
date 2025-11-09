@@ -10,15 +10,15 @@ import com.lumen.cp56.domian.repository.FabricanteRepository;
 import com.lumen.cp56.domian.repository.LocalizacaoEstoqueRepository;
 import com.lumen.cp56.domian.repository.ReagenteRepository;
 import com.lumen.cp56.mapper.ReagenteMapper;
-import jakarta.persistence.EntityNotFoundException;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.UUID;
 
 @Service
-@Transactional
+
 @RequiredArgsConstructor
 public class ReagenteService {
 
@@ -29,26 +29,26 @@ public class ReagenteService {
 
     private Reagente findReagenteById(UUID id) {
         return reagenteRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Reagente não encontrado com ID: " + id));
+                .orElseThrow(() ->new RuntimeException("Reagente não encontrado com ID: " + id));
     }
 
     private Fabricante findFabricanteById(UUID id) {
         return fabricanteRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Fabricante não encontrado com ID: " + id));
+                .orElseThrow(() -> new RuntimeException("Fabricante não encontrado com ID: " + id));
     }
 
     private LocalizacaoEstoque findLocalizacaoById(UUID id) {
         return localizacaoEstoqueRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Localização não encontrada com ID: " + id));
+                .orElseThrow(() -> new RuntimeException("Localização não encontrada com ID: " + id));
     }
 
-    @Transactional(readOnly = true)
+
     public List<ReagenteOutputDTO> findAll() {
         List<Reagente> reagentes = reagenteRepository.findAll();
         return reagenteMapper.toOutputDTOList(reagentes);
     }
 
-    @Transactional(readOnly = true)
+
     public ReagenteOutputDTO findById(UUID id) {
         Reagente reagente = findReagenteById(id);
         return reagenteMapper.toOutputDTO(reagente);

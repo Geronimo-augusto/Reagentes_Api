@@ -6,15 +6,13 @@ import com.lumen.cp56.domian.dtos.Output.LocalizacaoEstoqueOutputDTO;
 import com.lumen.cp56.domian.model.LocalizacaoEstoque;
 import com.lumen.cp56.domian.repository.LocalizacaoEstoqueRepository;
 import com.lumen.cp56.mapper.LocalizacaoEstoqueMapper;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.UUID;
 
 @Service
-@Transactional
+
 @RequiredArgsConstructor
 public class LocalizacaoEstoqueService {
 
@@ -23,16 +21,16 @@ public class LocalizacaoEstoqueService {
 
     private LocalizacaoEstoque findLocalizacaoById(UUID id) {
         return localizacaoEstoqueRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Localização não encontrada com ID: " + id));
+                .orElseThrow(() -> new RuntimeException("Localização não encontrada com ID: " + id));
     }
 
-    @Transactional(readOnly = true)
+
     public List<LocalizacaoEstoqueOutputDTO> findAll() {
         List<LocalizacaoEstoque> localizacoes = localizacaoEstoqueRepository.findAll();
         return localizacaoEstoqueMapper.toOutputDTOList(localizacoes);
     }
 
-    @Transactional(readOnly = true)
+
     public LocalizacaoEstoqueOutputDTO findById(UUID id) {
         LocalizacaoEstoque localizacao = findLocalizacaoById(id);
         return localizacaoEstoqueMapper.toOutputDTO(localizacao);

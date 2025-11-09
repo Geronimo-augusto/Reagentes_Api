@@ -8,16 +8,13 @@ import com.lumen.cp56.domian.model.Reagente;
 import com.lumen.cp56.domian.repository.MovimentacaoEstoqueRepository;
 import com.lumen.cp56.domian.repository.ReagenteRepository;
 import com.lumen.cp56.mapper.MovimentacaoEstoqueMapper;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class MovimentacaoEstoqueService {
 
@@ -27,15 +24,15 @@ public class MovimentacaoEstoqueService {
 
     private Reagente findReagenteById(UUID id) {
         return reagenteRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Reagente não encontrado com ID: " + id));
+                .orElseThrow(() -> new RuntimeException("Reagente não encontrado com ID: " + id));
     }
 
     private MovimentacaoEstoque findMovimentacaoById(UUID id) {
         return movimentacaoEstoqueRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Movimentação não encontrada com ID: " + id));
+                .orElseThrow(() -> new RuntimeException("Movimentação não encontrada com ID: " + id));
     }
 
-    @Transactional(readOnly = true)
+
     public List<MovimentacaoEstoqueOutputDTO> findAllByReagenteId(UUID reagenteId) {
         findReagenteById(reagenteId); // Valida se o reagente existe
         List<MovimentacaoEstoque> movimentacoes = movimentacaoEstoqueRepository.findByReagenteIdOrderByDataHoraMovimentacaoDesc(reagenteId);
