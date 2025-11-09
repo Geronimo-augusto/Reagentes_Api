@@ -1,36 +1,68 @@
 package com.lumen.cp56.domian.model;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-
+/**
+ * Representa um Fabricante de reagentes.
+ * Esta classe é uma entidade de domínio que poderá ser mapeada no banco pelo JPA.
+ *
+ * Cada Fabricante pode produzir um ou mais Reagentes (relacionamento 1:N).
+ */
 public class Fabricante {
 
-
+    /**
+     * Identificador único do fabricante.
+     * Pode ser gerado pela aplicação ou pelo provedor JPA, dependendo da estratégia adotada.
+     */
     private UUID id;
 
+    /** Nome jurídico do fabricante (como consta em registro oficial). */
     private String nomeOficial;
+
+    /** Nome fantasia ou nome comercial pelo qual o fabricante é conhecido no mercado. */
     private String nomeFantasia;
+
+    /** CNPJ do fabricante (para entidades brasileiras). */
     private String cnpj;
+
+    /** País onde o fabricante está localizado ou foi fundado. */
     private String paisOrigem;
 
+    /**
+     * Lista de reagentes produzidos pelo fabricante.
+     * Representa o lado "um" do relacionamento 1:N com Reagente.
+     */
     private List<Reagente> reagentes = new ArrayList<>();
 
-    // Construtor padrão (exigido pelo JPA)
+    /**
+     * Construtor padrão.
+     * Necessário para uso pelo JPA e frameworks de serialização.
+     */
     public Fabricante() {
-        // Se o ID for gerado pela aplicação:
+        // Caso o ID seja gerado na aplicação, descomente:
         // this.id = UUID.randomUUID();
     }
 
-    // Métodos do UML para gerenciar o relacionamento
+    /**
+     * Associa um reagente a este fabricante.
+     * Mantém a integridade bidirecional do relacionamento.
+     *
+     * @param reagente reagente a ser vinculado
+     */
     public void adicionarReagente(Reagente reagente) {
         reagentes.add(reagente);
         reagente.setFabricante(this);
     }
 
+    /**
+     * Remove a associação entre o reagente e este fabricante.
+     * Mantém a integridade bidirecional do relacionamento.
+     *
+     * @param reagente reagente a ser desvinculado
+     */
     public void removerReagente(Reagente reagente) {
         reagentes.remove(reagente);
         reagente.setFabricante(null);
@@ -85,7 +117,10 @@ public class Fabricante {
         this.reagentes = reagentes;
     }
 
-    // Equals e HashCode (boa prática para entidades)
+    /**
+     * Equals e hashCode baseados apenas no ID.
+     * Importante para evitar problemas em coleções e comparações entre entidades.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
