@@ -1,8 +1,8 @@
 package com.lumen.cp56.controler;
 
-import com.lumen.cp56.domian.dtos.Input.MovimentacaoEstoqueInputDTO;
-import com.lumen.cp56.domian.dtos.Output.MovimentacaoEstoqueOutputDTO;
-import com.lumen.cp56.domian.service.MovimentacaoEstoqueService;
+import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.UUID;
+import com.lumen.cp56.domian.dtos.Input.MovimentacaoEstoqueInputDTO;
+import com.lumen.cp56.domian.dtos.Output.MovimentacaoEstoqueOutputDTO;
+import com.lumen.cp56.domian.service.MovimentacaoEstoqueService;
 
 
 @RestController
-@RequestMapping("/reagentes/{reagenteId}/movimentacoes") // URL Base Aninhada
+@RequestMapping("/reagentes/{reagenteId}/movimentacoes") 
 public class MovimentacaoEstoqueController {
 
     @Autowired
