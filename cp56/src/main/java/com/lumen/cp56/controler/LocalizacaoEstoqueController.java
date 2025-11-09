@@ -26,36 +26,39 @@ public class LocalizacaoEstoqueController {
         return localizacaoEstoqueService.findAll();
     }
 
-    @GetMapping("/{reagenteId}")
+
+    @GetMapping("/{localizacaoId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ResponseEntity<LocalizacaoEstoqueOutputDTO> buscar(@PathVariable UUID reagenteId) {
-        return ResponseEntity.ok(localizacaoEstoqueService.findById(reagenteId));
+    public ResponseEntity<LocalizacaoEstoqueOutputDTO> buscar(@PathVariable UUID localizacaoId) {
+        return ResponseEntity.ok(localizacaoEstoqueService.findById(localizacaoId));
     }
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public ResponseEntity<LocalizacaoEstoqueOutputDTO> adicionar(@RequestBody LocalizacaoEstoqueInputDTO input) {
-        LocalizacaoEstoqueOutputDTO novoReagente =  localizacaoEstoqueService.create(input);
+        LocalizacaoEstoqueOutputDTO novoLocal =  localizacaoEstoqueService.create(input);
 
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(novoReagente.id())
+                .buildAndExpand(novoLocal.id())
                 .toUri()
                 ;
 
-        return ResponseEntity.created(uri).body(novoReagente);
+        return ResponseEntity.created(uri).body(novoLocal);
     }
 
-    @PutMapping("/{reagenteId}")
+
+    @PutMapping("/{localizacaoId}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ResponseEntity<LocalizacaoEstoqueOutputDTO> atualizar(@PathVariable UUID reagenteId, @RequestBody LocalizacaoEstoqueInputDTO input) {
-        return ResponseEntity.ok(localizacaoEstoqueService.update(reagenteId,input));
+    public ResponseEntity<LocalizacaoEstoqueOutputDTO> atualizar(@PathVariable UUID localizacaoId, @RequestBody LocalizacaoEstoqueInputDTO input) {
+        return ResponseEntity.ok(localizacaoEstoqueService.update(localizacaoId, input));
     }
 
-    @DeleteMapping("/{reagenteId}")
+
+    @DeleteMapping("/{localizacaoId}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void excluir(@PathVariable UUID reagenteId) {
-        localizacaoEstoqueService.delete(reagenteId);
+    public void excluir(@PathVariable UUID localizacaoId) {
+        localizacaoEstoqueService.delete(localizacaoId);
     }
 }
