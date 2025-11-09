@@ -3,6 +3,7 @@ package com.lumen.cp56.controler;
 import com.lumen.cp56.domian.dtos.Input.ReagenteInputDTO;
 import com.lumen.cp56.domian.dtos.Output.ReagenteOutputDTO;
 import com.lumen.cp56.domian.service.ReagenteService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,49 +15,55 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/reagentes") // URL Base
+@RequestMapping("/reagentes")
 public class ReagenteController {
 
     @Autowired
     private ReagenteService reagenteService;
 
+
     @GetMapping
-    @ResponseStatus(code = HttpStatus.OK)
-    public List<ReagenteOutputDTO> listar(){
-       return reagenteService.findAll();
+    @ResponseStatus(HttpStatus.OK)
+    public List<ReagenteOutputDTO> listar() {
+        return reagenteService.findAll();
     }
 
+
     @GetMapping("/{reagenteId}")
-    @ResponseStatus(code = HttpStatus.OK)
+    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ReagenteOutputDTO> buscar(@PathVariable UUID reagenteId) {
         return ResponseEntity.ok(reagenteService.findById(reagenteId));
     }
 
+
     @PostMapping
-    @ResponseStatus(code = HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ReagenteOutputDTO> adicionar(@RequestBody ReagenteInputDTO input) {
-        ReagenteOutputDTO novoReagente =  reagenteService.create(input);
+        ReagenteOutputDTO novoReagente = reagenteService.create(input);
 
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(novoReagente.id())
-                .toUri()
-                ;
+                .toUri();
 
         return ResponseEntity.created(uri).body(novoReagente);
     }
 
+
     @PutMapping("/{reagenteId}")
-    @ResponseStatus(code = HttpStatus.OK)
-    public ResponseEntity<ReagenteOutputDTO> atualizar(@PathVariable UUID reagenteId, @RequestBody ReagenteInputDTO input) {
-        return ResponseEntity.ok(reagenteService.update(reagenteId,input));
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<ReagenteOutputDTO> atualizar(
+            @PathVariable UUID reagenteId,
+            @RequestBody ReagenteInputDTO input
+    ) {
+        return ResponseEntity.ok(reagenteService.update(reagenteId, input));
     }
 
+
     @DeleteMapping("/{reagenteId}")
-    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void excluir(@PathVariable UUID reagenteId) {
         reagenteService.delete(reagenteId);
     }
-
 }
