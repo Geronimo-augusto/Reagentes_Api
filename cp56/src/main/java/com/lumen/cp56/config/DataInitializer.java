@@ -1,20 +1,28 @@
 // package: com.lumen.cp56.config
 package com.lumen.cp56.config;
 
-import com.lumen.cp56.domian.model.*;
-import com.lumen.cp56.domian.repository.FabricanteRepository;
-import com.lumen.cp56.domian.repository.LocalizacaoEstoqueRepository;
-import com.lumen.cp56.domian.repository.MovimentacaoEstoqueRepository;
-import com.lumen.cp56.domian.repository.ReagenteRepository;
-import lombok.RequiredArgsConstructor;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.UUID;
+import com.lumen.cp56.domian.model.Fabricante;
+import com.lumen.cp56.domian.model.LocalizacaoEstoque;
+import com.lumen.cp56.domian.model.MovimentacaoEstoque;
+import com.lumen.cp56.domian.model.Reagente;
+import com.lumen.cp56.domian.model.StatusReagente;
+import com.lumen.cp56.domian.model.TipoLocalizacaoEstoque;
+import com.lumen.cp56.domian.model.TipoMovimentacao;
+import com.lumen.cp56.domian.repository.FabricanteRepository;
+import com.lumen.cp56.domian.repository.LocalizacaoEstoqueRepository;
+import com.lumen.cp56.domian.repository.MovimentacaoEstoqueRepository;
+import com.lumen.cp56.domian.repository.ReagenteRepository;
+
+import lombok.RequiredArgsConstructor;
 
 /**
  * Esta classe é executada automaticamente na inicialização do Spring Boot.
@@ -119,8 +127,6 @@ public class DataInitializer implements CommandLineRunner {
 
             log.info("... Carga de dados em memória concluída.");
 
-        } else {
-            log.info("Banco de dados já populado. Nenhuma ação necessária.");
-        }
+        } 
     }
 }
