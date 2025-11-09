@@ -24,10 +24,7 @@ import com.lumen.cp56.domian.repository.ReagenteRepository;
 
 import lombok.RequiredArgsConstructor;
 
-/**
- * Esta classe é executada automaticamente na inicialização do Spring Boot.
- * Ela é usada para popular o "banco de dados" em memória com dados iniciais.
- */
+
 @Component
 @RequiredArgsConstructor
 public class DataInitializer implements CommandLineRunner {
