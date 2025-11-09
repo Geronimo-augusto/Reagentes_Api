@@ -6,9 +6,11 @@ Este projeto **não** utiliza um banco de dados persistente. Os dados são armaz
 
 ## 👨‍💻 Membros da Equipe
 
-* **[Seu Nome Completo]** - [RM99999]
-* **[Nome do Colega 2]** - [RM88888]
-* **[Nome do Colega 3]** - [RM77777]
+* **Geronimo Augusto Nascimento Santos** - RM: 557170
+* **Ana Laura** - RM: 554375
+* **Ianny Raquel** - RM: 559096
+* **Murilo Cordeiro** - RM: 556727
+* **Vitor Augusto** - RM: 555469 
 
 ---
 
