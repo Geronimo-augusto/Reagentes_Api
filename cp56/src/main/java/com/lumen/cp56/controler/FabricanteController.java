@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
@@ -17,66 +18,45 @@ import java.util.UUID;
 @RequestMapping("/fabricantes") // URL Base
 public class FabricanteController {
 
-    private final FabricanteService fabricanteService;
-
     @Autowired
-    public FabricanteController(FabricanteService fabricanteService) {
-        this.fabricanteService = fabricanteService;
-    }
+    private FabricanteService fabricanteService;
 
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public List<FabricanteOutputDTO> listar() {
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<FabricanteOutputDTO> listar(){
         return fabricanteService.findAll();
     }
 
     @GetMapping("/{fabricanteId}")
+    @ResponseStatus(code = HttpStatus.OK)
     public ResponseEntity<FabricanteOutputDTO> buscar(@PathVariable UUID fabricanteId) {
-        FabricanteOutputDTO fabricante = fabricanteService.findById(fabricanteId);
-        if (fabricante == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(fabricante);
+        return ResponseEntity.ok(fabricanteService.findById(fabricanteId));
     }
 
     @PostMapping
+    @ResponseStatus(code = HttpStatus.CREATED)
     public ResponseEntity<FabricanteOutputDTO> adicionar(@RequestBody FabricanteInputDTO input) {
-        FabricanteOutputDTO novoFabricante = fabricanteService.create(input);
-
-        if (novoFabricante == null || novoFabricante.id() == null) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        FabricanteOutputDTO novoReagente =  fabricanteService.create(input);
 
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(novoFabricante.id())
-                .toUri();
+                .buildAndExpand(novoReagente.id())
+                .toUri()
+                ;
 
-        return ResponseEntity.created(uri).body(novoFabricante);
+        return ResponseEntity.created(uri).body(novoReagente);
     }
 
     @PutMapping("/{fabricanteId}")
-    public ResponseEntity<FabricanteOutputDTO> atualizar(
-            @PathVariable UUID fabricanteId,
-            @RequestBody FabricanteInputDTO input) {
-
-        FabricanteOutputDTO atualizado = fabricanteService.update(fabricanteId, input);
-
-        if (atualizado == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(atualizado);
+    @ResponseStatus(code = HttpStatus.OK)
+    public ResponseEntity<FabricanteOutputDTO> atualizar(@PathVariable UUID fabricanteId, @RequestBody FabricanteInputDTO input) {
+        return ResponseEntity.ok(fabricanteService.update(fabricanteId,input));
     }
 
     @DeleteMapping("/{fabricanteId}")
-    public ResponseEntity<Void> excluir(@PathVariable UUID fabricanteId) {
-        try {
-            fabricanteService.delete(fabricanteId);
-            return ResponseEntity.noContent().build();
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.notFound().build();
-        }
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void excluir(@PathVariable UUID fabricanteId) {
+        fabricanteService.delete(fabricanteId);
     }
 }
