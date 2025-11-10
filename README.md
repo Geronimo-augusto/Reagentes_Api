@@ -94,7 +94,7 @@ Gerencia os locais físicos de armazenamento (refrigeradores, freezers, etc.).
 
 O recurso principal. Gerencia os reagentes, associando-os a um fabricante e uma localização.
 
-| Método | Endpoint | Descrição |
+| Método| Endpoint| Descrição|
 | :--- | :--- | :--- |
 | `GET` | `/reagentes` | Lista todos os reagentes. |
 | `GET` | `/reagentes/{id}` | Busca um reagente específico pelo seu UUID. |
