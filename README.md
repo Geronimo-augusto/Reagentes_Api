@@ -163,7 +163,7 @@ Gerencia o histórico de entradas e saídas de um reagente. É um sub-recurso de
 | `DELETE` | `/reagentes/{reagenteId}/movimentacoes/{movimentacaoId}` | Exclui uma movimentação. (O estoque do reagente é revertido).|
 
 #### Input (`POST`): `MovimentacaoEstoqueInputDTO`
-```json
+``json
 {
     "observacao": "Uso em equipamento Cobas",
     "quantidadeMovimentada": -5,
