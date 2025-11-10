@@ -14,7 +14,7 @@ Este projeto **não** utiliza um banco de dados persistente. Os dados são armaz
 
 ---
 
-## 🚀 Endpoints da API
+## 🚀 Endpoints da API -
 
 A API está estruturada em 4 recursos principais.
 
