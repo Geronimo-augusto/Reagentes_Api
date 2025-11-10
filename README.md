@@ -88,7 +88,6 @@ Gerencia os locais físicos de armazenamento (refrigeradores, freezers, etc.).
     "tipo": "REFRIGERADOR"
 }
 ```
-
 ---
 
 ### 3. Reagentes
