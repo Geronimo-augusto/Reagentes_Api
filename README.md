@@ -174,7 +174,7 @@ Gerencia o histórico de entradas e saídas de um reagente. É um sub-recurso de
 ```
 *Valores de `tipo`: `ENTRADA_NOTA`, `SAIDA_USO_ANALISADOR`, `SAIDA_DESCARTE_VENCIMENTO`, etc.*
 
-#### Output (`GET`): `MovimentacaoEstoqueOutputDTO`
+### Output (`GET`): `MovimentacaoEstoqueOutputDTO`
 ```json
 {
     "id": "c3e4b5d6-8a1b-4f9e-9e1a-2d8c3e4b5d6f",
