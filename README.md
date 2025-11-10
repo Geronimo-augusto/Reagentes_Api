@@ -159,9 +159,9 @@ Gerencia o histórico de entradas e saídas de um reagente. É um sub-recurso de
 
 | Método | Endpoint | Descrição |
 | :--- | :--- | :--- |
-| `GET` | `/reagentes/{reagenteId}/movimentacoes` | Lista todas as movimentações de um reagente específico. |
-| `POST` | `/reagentes/{reagenteId}/movimentacoes` | Cria uma nova movimentação para um reagente. (O estoque do reagente é atualizado automaticamente). |
-| `DELETE` | `/reagentes/{reagenteId}/movimentacoes/{movimentacaoId}` | Exclui uma movimentação. (O estoque do reagente é revertido). |
+| `GET` | `/reagentes/{reagenteId}/movimentacoes` | Lista todas as movimentações de um reagente específico.|
+| `POST` | `/reagentes/{reagenteId}/movimentacoes` | Cria uma nova movimentação para um reagente. (O estoque do reagente é atualizado automaticamente).|
+| `DELETE` | `/reagentes/{reagenteId}/movimentacoes/{movimentacaoId}` | Exclui uma movimentação. (O estoque do reagente é revertido).|
 
 #### Input (`POST`): `MovimentacaoEstoqueInputDTO`
 ```json
