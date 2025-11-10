@@ -103,7 +103,7 @@ O recurso principal. Gerencia os reagentes, associando-os a um fabricante e uma 
 | `PUT` | `/reagentes/{id}` | Atualiza um reagente existente. |
 | `DELETE` | `/reagentes/{id}` | Exclui um reagente. |
 
-#### Input (`POST` / `PUT`): `ReagenteInputDTO`
+### Input (`POST` / `PUT`): `ReagenteInputDTO`
 *Note que para os relacionamentos, enviamos apenas os IDs.*
 ```json
 {
