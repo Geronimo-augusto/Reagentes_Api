@@ -6,11 +6,11 @@ Este projeto **não** utiliza um banco de dados persistente. Os dados são armaz
 
 ## 👨‍💻 Membros da Equipe
 
-* **Geronimo Augusto Nascimento Santos** - RM: 557170
-* **Ana Laura** - RM: 554375
-* **Ianny Raquel** - RM: 559096
-* **Murilo Cordeiro** - RM: 556727
-* **Vitor Augusto** - RM: 555469 
+* **Geronimo Augusto Nascimento Santos** - RM: 557170;
+* **Ana Laura** - RM: 554375;
+* **Ianny Raquel** - RM: 559096;
+* **Murilo Cordeiro** - RM: 556727;
+* **Vitor Augusto** - RM: 555469.
 
 ---
 
