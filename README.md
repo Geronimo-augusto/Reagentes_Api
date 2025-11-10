@@ -119,7 +119,7 @@ O recurso principal. Gerencia os reagentes, associando-os a um fabricante e uma 
 ```
 *Valores de `status`: `QUARENTENA`, `LIBERADO`, `EM_USO`, `VENCIDO`, `REPROVADO_CONTROLE_QUALIDADE`, `DESCARTADO`*
 
-#### Output (`GET`): `ReagenteOutputDTO`
+### Output (`GET`): `ReagenteOutputDTO`
 *Note que na saída, os relacionamentos vêm como objetos completos.*
 ```json
 {
